@@ -1,0 +1,38 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    >
+
+    <ImageView
+        android:id="@+id/ivHomeIcon"
+        style="@style/IconTheme"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"/>
+
+    <TextView
+        android:id="@+id/tvHomeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:layout_toEndOf="@+id/ivHomeIcon"
+        android:layout_toStartOf="@+id/tvHomeSum"
+        android:layout_centerVertical="true"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvHomeSum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="8dp"
+        android:textSize="18sp"
+        android:textColor="@color/colorIncome" />
+
+
+
+
+</RelativeLayout>

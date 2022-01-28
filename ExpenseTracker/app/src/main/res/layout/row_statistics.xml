@@ -1,0 +1,39 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/ivStatisticIcon"
+        style="@style/IconTheme" />
+
+    <TextView
+        android:id="@+id/tvStatisticCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/ivStatisticIcon"
+        android:layout_toStartOf="@+id/tvStatisticPercentage"
+        android:layout_centerVertical="true"
+        android:layout_marginHorizontal="8dp"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvStatisticPercentage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@+id/tvStatisticSum"
+        android:layout_centerVertical="true"
+        android:layout_marginHorizontal="8dp"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tvStatisticSum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="8dp"
+        android:textSize="18sp"
+        android:textColor="@color/colorIncome" />
+</RelativeLayout>

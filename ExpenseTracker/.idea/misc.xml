@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Kaushal/AndroidStudioProjects/ExpenseTracker/app/src/main/res/drawable/ic_add.xml" value="0.26875" />
+        <entry key="..\:/Users/Kaushal/AndroidStudioProjects/ExpenseTracker/app/src/main/res/drawable/ic_money.xml" value="0.15" />
+        <entry key="..\:/Users/Kaushal/AndroidStudioProjects/ExpenseTracker/app/src/main/res/layout/activity_add_category.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/Kaushal/AndroidStudioProjects/ExpenseTracker/app/src/main/res/layout/activity_categories.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/Kaushal/AndroidStudioProjects/ExpenseTracker/app/src/main/res/layout/activity_main.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/Kaushal/AndroidStudioProjects/ExpenseTracker/app/src/main/res/layout/activity_settings.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/Kaushal/AndroidStudioProjects/ExpenseTracker/app/src/main/res/layout/activity_sign_in.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/Kaushal/AndroidStudioProjects/ExpenseTracker/app/src/main/res/layout/activity_signin.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/Kaushal/AndroidStudioProjects/ExpenseTracker/app/src/main/res/layout/activity_splash.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/Kaushal/AndroidStudioProjects/ExpenseTracker/app/src/main/res/layout/fragment_history.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/Kaushal/AndroidStudioProjects/ExpenseTracker/app/src/main/res/layout/fragment_home.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/Kaushal/AndroidStudioProjects/ExpenseTracker/app/src/main/res/layout/fragment_settings.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/Kaushal/AndroidStudioProjects/ExpenseTracker/app/src/main/res/layout/fragment_statistics.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/Kaushal/AndroidStudioProjects/ExpenseTracker/app/src/main/res/layout/row_categories.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/Kaushal/AndroidStudioProjects/ExpenseTracker/app/src/main/res/layout/row_history.xml" value="0.1" />
+        <entry key="..\:/Users/Kaushal/AndroidStudioProjects/ExpenseTracker/app/src/main/res/layout/row_home.xml" value="0.1" />
+        <entry key="..\:/Users/Kaushal/AndroidStudioProjects/ExpenseTracker/app/src/main/res/layout/row_statistics.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/Kaushal/AndroidStudioProjects/ExpenseTracker/app/src/main/res/menu/menu_date_range.xml" value="0.2351851851851852" />
+        <entry key="..\:/Users/Kaushal/AndroidStudioProjects/ExpenseTracker/app/src/main/res/menu/menu_main.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/Kaushal/AndroidStudioProjects/ExpenseTracker/app/src/main/res/xml/app_preferences.xml" value="0.2526041666666667" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
