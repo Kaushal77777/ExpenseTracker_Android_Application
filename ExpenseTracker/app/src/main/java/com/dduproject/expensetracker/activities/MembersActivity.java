@@ -2,22 +2,19 @@ package com.dduproject.expensetracker.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import java.util.ArrayList;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
+import com.dduproject.expensetracker.utils.DBHelper;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.dduproject.expensetracker.adapter.MembersAdapter;
 import com.dduproject.expensetracker.databinding.ActivityMembersBinding;
-import com.dduproject.expensetracker.models.User;
 import com.dduproject.expensetracker.models.Member;
-import com.dduproject.expensetracker.utils.MembersHelper;
 
-public class MembersActivity extends BaseActivity {
+public class MembersActivity extends AppCompatActivity {
     ActivityMembersBinding binding;
-    private User user;
-    private ArrayList<Member> membersList;
     private MembersAdapter membersAdapter;
 
     @Override
@@ -30,35 +27,18 @@ public class MembersActivity extends BaseActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        getData();
+        FirebaseRecyclerOptions<Member> options = new FirebaseRecyclerOptions.Builder<Member>()
+                .setQuery(DBHelper.getMembers(), snapshot -> new Member(snapshot.getKey(), snapshot.child("name").getValue().toString()))
+                .build();
 
-        membersList = new ArrayList<>();
-        membersAdapter = new MembersAdapter(this, membersList, getApplicationContext());
-        binding.lvMembers.setAdapter(membersAdapter);
+        membersAdapter = new MembersAdapter(getApplicationContext(), options);
+
+        binding.rvMembers.setLayoutManager(new LinearLayoutManager(this));
+        binding.rvMembers.setAdapter(membersAdapter);
 
         binding.fabAddMember.setOnClickListener(v ->
                 startActivity(new Intent(MembersActivity.this, AddMemberActivity.class))
         );
-
-    }
-    private void getData(){
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("users").child(getUid()).get().addOnCompleteListener(task -> {
-            if (!task.isSuccessful()) {
-                Log.e( "Error getting data", String.valueOf(task.getException()));
-            } else {
-                user = task.getResult().getValue(User.class);
-                dataUpdated();
-            }
-        });
-    }
-    private void dataUpdated() {
-        if (user == null) {
-            return;
-        }
-        membersList.clear();
-        membersList.addAll(MembersHelper.getCustomMembers(user));
-        membersAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -66,15 +46,16 @@ public class MembersActivity extends BaseActivity {
         onBackPressed();
         return true;
     }
+
     @Override
-    protected void onResume() {
-        getData();
-        super.onResume();
+    protected void onStart() {
+        super.onStart();
+        membersAdapter.startListening();
     }
 
     @Override
-    protected void onRestart() {
-        getData();
-        super.onRestart();
+    protected void onStop() {
+        super.onStop();
+        membersAdapter.stopListening();
     }
 }

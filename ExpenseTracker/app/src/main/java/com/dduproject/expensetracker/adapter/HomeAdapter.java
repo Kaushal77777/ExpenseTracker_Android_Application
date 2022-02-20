@@ -1,24 +1,26 @@
 package com.dduproject.expensetracker.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.content.Context;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
-import java.util.ArrayList;
 
+import com.dduproject.expensetracker.R;
 import com.dduproject.expensetracker.models.HomeModel;
 import com.dduproject.expensetracker.utils.CurrencyHelper;
-import com.dduproject.expensetracker.R;
+
+import java.util.ArrayList;
 
 public class HomeAdapter extends ArrayAdapter<HomeModel> implements View.OnClickListener {
 
     private ArrayList<HomeModel> items;
     Context context;
+
 
     public HomeAdapter(Context context, ArrayList<HomeModel> items) {
         super(context, R.layout.row_home, items);

@@ -1,16 +1,18 @@
 package com.dduproject.expensetracker.activities;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import com.google.firebase.database.FirebaseDatabase;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.dduproject.expensetracker.utils.DBHelper;
 import com.dduproject.expensetracker.databinding.ActivityEditCategoryBinding;
-import com.dduproject.expensetracker.exceptions.EmptyStringException;
 import com.dduproject.expensetracker.models.Category;
 
-public class EditCategoryActivity extends BaseActivity {
+public class EditCategoryActivity extends AppCompatActivity {
     ActivityEditCategoryBinding binding;
     private String categoryID;
+    private String categoryName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,34 +23,26 @@ public class EditCategoryActivity extends BaseActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-
-        String categoryName = getIntent().getExtras().getString("category-name");
         categoryID = getIntent().getExtras().getString("category-id");
+        categoryName = getIntent().getExtras().getString("category-name");
+
         binding.etCategoryName.setText(categoryName);
 
         binding.btnSave.setOnClickListener(v -> {
-            try {
-                editCustomCategory(binding.etCategoryName.getText().toString());
-            } catch (EmptyStringException e) {
-                binding.ilCategoryName.setError(e.getMessage());
+            categoryName = binding.etCategoryName.getText().toString();
+            if(categoryName.isEmpty()){
+                binding.ilCategoryName.setError("Please Enter Category Name");
+            } else {
+                DBHelper.updateCategory(categoryID, new Category(categoryName));
+                finish();
             }
-
         });
 
         binding.btnRemove.setOnClickListener(v -> {
-            FirebaseDatabase.getInstance().getReference().child("users").child(getUid()).child("categories").child(categoryID).removeValue();
+            DBHelper.deleteCategory(categoryID);
             finish();
         });
     }
-
-    private void editCustomCategory(String categoryName) throws EmptyStringException {
-        if(categoryName == null || categoryName.length() == 0) {
-            throw new EmptyStringException("Entry name length should be > 0");
-        }
-        FirebaseDatabase.getInstance().getReference().child("users").child(getUid()).child("categories").child(categoryID).setValue(new Category(categoryName));
-        finish();
-    }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {

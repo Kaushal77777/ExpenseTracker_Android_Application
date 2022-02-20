@@ -3,79 +3,69 @@ package com.dduproject.expensetracker.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.auth.FirebaseAuth;
+import com.dduproject.expensetracker.databinding.RowHistoryBinding;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.dduproject.expensetracker.R;
 import com.dduproject.expensetracker.activities.EditEntryActivity;
-import com.dduproject.expensetracker.models.WalletEntry;
+import com.dduproject.expensetracker.models.Entry;
 import com.dduproject.expensetracker.utils.CurrencyHelper;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
-public class HistoryAdapter extends ArrayAdapter<WalletEntry> implements View.OnClickListener {
+public class HistoryAdapter extends FirebaseRecyclerAdapter<Entry, HistoryAdapter.HistoryViewHolder> {
 
-    Context context;
+    Context mContext;
 
-    public HistoryAdapter(Context context, List<WalletEntry> data) {
-        super(context, R.layout.row_history, data);
-        this.context = context;
+    public HistoryAdapter(Context mContext, @NonNull FirebaseRecyclerOptions<Entry> options) {
+        super(options);
+        this.mContext = mContext;
     }
 
     @Override
-    public void onClick(View v) {
-
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View listItem = convertView;
-        if (listItem == null) {
-            listItem = LayoutInflater.from(context).inflate(R.layout.row_history, parent, false);
-        }
-        WalletEntry walletEntry = getItem(position);
-        ImageView ivEntryIcon = listItem.findViewById(R.id.ivEntryIcon);
-        TextView tvEntryName = listItem.findViewById(R.id.tvEntryName);
-        TextView tvEntryCategory = listItem.findViewById(R.id.tvEntryCategory);
-        TextView tvEntryMember = listItem.findViewById(R.id.tvEntryMember);
-        TextView tvEntryDate = listItem.findViewById(R.id.tvEntryDate);
-        TextView tvEntryAmount = listItem.findViewById(R.id.tvEntryAmount);
-
-        tvEntryCategory.setText(walletEntry.category);
-        tvEntryName.setText(walletEntry.name);
-        tvEntryMember.setText(walletEntry.member);
-
-        Date date = new Date(-walletEntry.timestamp);
-        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault());
-        tvEntryDate.setText(dateFormat.format(date));
-        tvEntryAmount.setText(CurrencyHelper.formatCurrency(walletEntry.balanceDifference));
-        tvEntryAmount.setTextColor(ContextCompat.getColor(context, walletEntry.balanceDifference < 0 ? R.color.colorExpense : R.color.colorIncome));
-        ivEntryIcon.setBackgroundColor(ContextCompat.getColor(context, walletEntry.balanceDifference < 0 ? R.color.colorExpense : R.color.colorIncome));
-        listItem.setOnClickListener(v -> {
-            Intent intent = new Intent(context, EditEntryActivity.class);
-            intent.putExtra("wallet-entry-id", walletEntry.id);
-            intent.putExtra("wallet-entry-category", walletEntry.category);
-            intent.putExtra("wallet-entry-name", walletEntry.name);
-            intent.putExtra("wallet-entry-member", walletEntry.member);
-            intent.putExtra("wallet-entry-timestamp", walletEntry.timestamp);
-            intent.putExtra("wallet-entry-balance-difference", walletEntry.balanceDifference);
-            context.startActivity(intent);
+    public void onBindViewHolder(HistoryViewHolder viewHolder, int position, @NonNull Entry entry) {
+        Date date = new Date(entry.timestamp);
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm a", Locale.getDefault());
+        viewHolder.binding.tvEntryCategory.setText(entry.category);
+        viewHolder.binding.tvEntryName.setText(entry.name);
+        viewHolder.binding.tvEntryMember.setText(entry.member);
+        viewHolder.binding.tvEntryDate.setText(dateFormat.format(date));
+        viewHolder.binding.tvEntryAmount.setText(CurrencyHelper.formatCurrency(entry.amount));
+        viewHolder.binding.tvEntryAmount.setTextColor(ContextCompat.getColor(mContext, entry.amount < 0 ? R.color.colorExpense : R.color.colorIncome));
+        viewHolder.binding.ivEntryIcon.setBackgroundColor(ContextCompat.getColor(mContext, entry.amount < 0 ? R.color.colorExpense : R.color.colorIncome));
+        viewHolder.binding.btnEditEntry.setOnClickListener(view -> {
+            Intent intent = new Intent(mContext, EditEntryActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra("entry-id", entry.id);
+            intent.putExtra("entry-category", entry.category);
+            intent.putExtra("entry-name", entry.name);
+            intent.putExtra("entry-member", entry.member);
+            intent.putExtra("entry-timestamp", entry.timestamp);
+            intent.putExtra("entry-amount", entry.amount);
+            mContext.startActivity(intent);
         });
-
-        return listItem;
-    }
-    public String getUid() {
-        return FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 
+    @NonNull
+    @Override
+    public HistoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new HistoryViewHolder(RowHistoryBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+    }
+
+    public static class HistoryViewHolder extends RecyclerView.ViewHolder{
+        RowHistoryBinding binding;
+        public HistoryViewHolder(RowHistoryBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
+    }
 }

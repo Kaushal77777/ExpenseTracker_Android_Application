@@ -2,12 +2,14 @@ package com.dduproject.expensetracker.activities;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import com.google.firebase.database.FirebaseDatabase;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.dduproject.expensetracker.utils.DBHelper;
 import com.dduproject.expensetracker.databinding.ActivityAddMemberBinding;
-import com.dduproject.expensetracker.exceptions.EmptyStringException;
 import com.dduproject.expensetracker.models.Member;
 
-public class AddMemberActivity extends BaseActivity {
+public class AddMemberActivity extends AppCompatActivity {
     ActivityAddMemberBinding binding;
 
     @Override
@@ -21,22 +23,15 @@ public class AddMemberActivity extends BaseActivity {
         }
 
         binding.btnAddMember.setOnClickListener(v -> {
-            try {
-                addMember(binding.etMemberName.getText().toString());
-            } catch (EmptyStringException e) {
-                binding.ilMemberName.setError(e.getMessage());
+            String memberName = binding.etMemberName.getText().toString();
+            if(memberName.isEmpty()){
+                binding.ilMemberName.setError("Please Enter Member Name");
+            } else {
+                DBHelper.addMember(new Member(memberName));
+                finish();
             }
         });
     }
-
-    private void addMember(String memberName) throws EmptyStringException {
-        if(memberName == null || memberName.length() == 0) {
-            throw new EmptyStringException("Entry name length should be > 0");
-        }
-        FirebaseDatabase.getInstance().getReference().child("users").child(getUid()).child("members").push().setValue(new Member(memberName));
-        finish();
-    }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {

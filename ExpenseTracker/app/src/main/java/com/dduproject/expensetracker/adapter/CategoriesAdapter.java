@@ -1,51 +1,51 @@
 package com.dduproject.expensetracker.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
-import java.util.List;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.dduproject.expensetracker.R;
+import com.dduproject.expensetracker.databinding.RowCategoriesBinding;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.dduproject.expensetracker.activities.EditCategoryActivity;
 import com.dduproject.expensetracker.models.Category;
 
-public class CategoriesAdapter extends ArrayAdapter<Category> implements View.OnClickListener {
+public class CategoriesAdapter extends FirebaseRecyclerAdapter<Category, CategoriesAdapter.CategoryViewHolder> {
 
-    private final Activity activity;
-    Context context;
+    Context mContext;
 
-    public CategoriesAdapter(Activity activity, List<Category> data, Context context) {
-        super(context, R.layout.row_categories, data);
-        this.context = context;
-        this.activity = activity;
+    public CategoriesAdapter(Context mContext, @NonNull FirebaseRecyclerOptions<Category> options) {
+        super(options);
+        this.mContext = mContext;
     }
 
     @Override
-    public void onClick(View v) {
-
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View listItem = convertView;
-        if (listItem == null) {
-            listItem = LayoutInflater.from(context).inflate(R.layout.row_categories, parent, false);
-        }
-        Category category = getItem(position);
-        TextView tvCategoryName = listItem.findViewById(R.id.tvCategoryName);
-        tvCategoryName.setText(category.getCategoryName());
-        listItem.setOnClickListener(v -> {
-            Intent intent = new Intent(activity, EditCategoryActivity.class);
+    public void onBindViewHolder(CategoryViewHolder viewHolder, int position, @NonNull Category category) {
+        viewHolder.binding.tvCategoryName.setText(category.name);
+        viewHolder.binding.btnEditCategory.setOnClickListener(view -> {
+            Intent intent = new Intent(mContext, EditCategoryActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra("category-id", category.getCategoryId());
-            intent.putExtra("category-name", category.getCategoryName());
-            activity.startActivity(intent);
+            intent.putExtra("category-name", category.name);
+            mContext.startActivity(intent);
         });
-        return listItem;
+    }
+
+    @NonNull
+    @Override
+    public CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new CategoryViewHolder(RowCategoriesBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+    }
+
+    public static class CategoryViewHolder extends RecyclerView.ViewHolder{
+        RowCategoriesBinding binding;
+        public CategoryViewHolder(RowCategoriesBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
     }
 }

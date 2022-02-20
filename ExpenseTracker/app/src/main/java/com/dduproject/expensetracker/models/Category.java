@@ -21,7 +21,13 @@ public class Category {
     public String getCategoryName() {
         return name;
     }
+    public void setCategoryName(String name) {
+        this.name = name;
+    }
     public String getCategoryId() {
         return id;
+    }
+    public void setCategoryId(String id) {
+        this.id = id;
     }
 }

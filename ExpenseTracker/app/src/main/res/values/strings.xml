@@ -9,9 +9,7 @@
     <string name="title_edit_category">Edit Category</string>
     <string name="title_edit_entry">Edit Wallet Entry</string>
     <string name="title_edit_member">Edit Member</string>
-
     <string name="web_client_id">462940546100-qmglt5jumb88dbmsk4k8frr0tgogblkl.apps.googleusercontent.com</string>
-    <string name="select_color">Select color</string>
     <string name="add_category">Add Category</string>
     <string name="category_name">Category Name</string>
     <string name="add_member">Add Member</string>
@@ -29,12 +27,11 @@
     <string name="save">Save</string>
     <string name="remove">Remove</string>
     <string name="top_expenses">Top expenses:</string>
-    <string name="last_100_elements">Last 100 elements:</string>
-
     <string name="pref_key_categories">custom_categories</string>
     <string name="pref_key_members">members</string>
     <string name="pref_key_logout">logout</string>
     <string name="income">Income</string>
     <string name="expense">Expense</string>
     <string name="account_balance">Account balance</string>
+    <string name="signin_page_logo">signin_page_logo</string>
 </resources>

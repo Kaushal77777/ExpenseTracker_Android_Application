@@ -3,6 +3,25 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Sem-6/zAndroid Project/ExpenseTracker_Android_Application/ExpenseTracker/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1395" />
+        <entry key="..\:/Sem-6/zAndroid Project/ExpenseTracker_Android_Application/ExpenseTracker/app/src/main/res/layout/activity_add_category.xml" value="0.2526041666666667" />
+        <entry key="..\:/Sem-6/zAndroid Project/ExpenseTracker_Android_Application/ExpenseTracker/app/src/main/res/layout/activity_add_entry.xml" value="0.2526041666666667" />
+        <entry key="..\:/Sem-6/zAndroid Project/ExpenseTracker_Android_Application/ExpenseTracker/app/src/main/res/layout/activity_add_member.xml" value="0.2391304347826087" />
+        <entry key="..\:/Sem-6/zAndroid Project/ExpenseTracker_Android_Application/ExpenseTracker/app/src/main/res/layout/activity_categories.xml" value="0.2391304347826087" />
+        <entry key="..\:/Sem-6/zAndroid Project/ExpenseTracker_Android_Application/ExpenseTracker/app/src/main/res/layout/activity_edit_member.xml" value="0.2391304347826087" />
+        <entry key="..\:/Sem-6/zAndroid Project/ExpenseTracker_Android_Application/ExpenseTracker/app/src/main/res/layout/activity_main.xml" value="0.2526041666666667" />
+        <entry key="..\:/Sem-6/zAndroid Project/ExpenseTracker_Android_Application/ExpenseTracker/app/src/main/res/layout/activity_members.xml" value="0.2391304347826087" />
+        <entry key="..\:/Sem-6/zAndroid Project/ExpenseTracker_Android_Application/ExpenseTracker/app/src/main/res/layout/activity_sign_in.xml" value="0.2391304347826087" />
+        <entry key="..\:/Sem-6/zAndroid Project/ExpenseTracker_Android_Application/ExpenseTracker/app/src/main/res/layout/activity_splash.xml" value="0.2526041666666667" />
+        <entry key="..\:/Sem-6/zAndroid Project/ExpenseTracker_Android_Application/ExpenseTracker/app/src/main/res/layout/fragment_history.xml" value="0.2526041666666667" />
+        <entry key="..\:/Sem-6/zAndroid Project/ExpenseTracker_Android_Application/ExpenseTracker/app/src/main/res/layout/fragment_home.xml" value="0.2526041666666667" />
+        <entry key="..\:/Sem-6/zAndroid Project/ExpenseTracker_Android_Application/ExpenseTracker/app/src/main/res/layout/fragment_statistics.xml" value="0.2526041666666667" />
+        <entry key="..\:/Sem-6/zAndroid Project/ExpenseTracker_Android_Application/ExpenseTracker/app/src/main/res/layout/row_categories.xml" value="0.2391304347826087" />
+        <entry key="..\:/Sem-6/zAndroid Project/ExpenseTracker_Android_Application/ExpenseTracker/app/src/main/res/layout/row_history.xml" value="0.2526041666666667" />
+        <entry key="..\:/Sem-6/zAndroid Project/ExpenseTracker_Android_Application/ExpenseTracker/app/src/main/res/layout/row_home.xml" value="0.2526041666666667" />
+        <entry key="..\:/Sem-6/zAndroid Project/ExpenseTracker_Android_Application/ExpenseTracker/app/src/main/res/layout/row_member.xml" value="0.2391304347826087" />
+        <entry key="..\:/Sem-6/zAndroid Project/ExpenseTracker_Android_Application/ExpenseTracker/app/src/main/res/layout/row_statistics.xml" value="0.2526041666666667" />
+        <entry key="..\:/Sem-6/zAndroid Project/ExpenseTracker_Android_Application/ExpenseTracker/app/src/main/res/menu/menu_main.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/Kaushal/AndroidStudioProjects/ExpenseTracker/app/src/main/res/drawable/ic_add.xml" value="0.26875" />
         <entry key="..\:/Users/Kaushal/AndroidStudioProjects/ExpenseTracker/app/src/main/res/drawable/ic_money.xml" value="0.15" />
         <entry key="..\:/Users/Kaushal/AndroidStudioProjects/ExpenseTracker/app/src/main/res/layout/activity_add_category.xml" value="0.2526041666666667" />

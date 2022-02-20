@@ -2,22 +2,20 @@ package com.dduproject.expensetracker.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import java.util.ArrayList;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
+import com.dduproject.expensetracker.utils.DBHelper;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.dduproject.expensetracker.databinding.ActivityCategoriesBinding;
-import com.dduproject.expensetracker.models.User;
 import com.dduproject.expensetracker.adapter.CategoriesAdapter;
-import com.dduproject.expensetracker.utils.CategoriesHelper;
 import com.dduproject.expensetracker.models.Category;
 
-public class CategoriesActivity extends BaseActivity {
+public class CategoriesActivity extends AppCompatActivity {
     ActivityCategoriesBinding binding;
-    private User user;
-    private ArrayList<Category> customCategoriesList;
-    private CategoriesAdapter categoriesAdapter;
+    CategoriesAdapter categoriesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,33 +27,18 @@ public class CategoriesActivity extends BaseActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        customCategoriesList = new ArrayList<>();
-        categoriesAdapter = new CategoriesAdapter(this, customCategoriesList, getApplicationContext());
-        binding.lvCategories.setAdapter(categoriesAdapter);
+        FirebaseRecyclerOptions<Category> options = new FirebaseRecyclerOptions.Builder<Category>()
+                .setQuery(DBHelper.getCategories(), snapshot -> new Category(snapshot.getKey(), snapshot.child("name").getValue().toString()))
+                .build();
+
+        categoriesAdapter = new CategoriesAdapter(getApplicationContext(), options);
+
+        binding.rvCategories.setLayoutManager(new LinearLayoutManager(this));
+        binding.rvCategories.setAdapter(categoriesAdapter);
 
         binding.fabAddCategory.setOnClickListener(v ->
                 startActivity(new Intent(CategoriesActivity.this, AddCategoryActivity.class))
         );
-        getData();
-    }
-    private void getData(){
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("users").child(getUid()).get().addOnCompleteListener(task -> {
-            if (!task.isSuccessful()) {
-                Log.e( "Error getting data", String.valueOf(task.getException()));
-            } else {
-                user = task.getResult().getValue(User.class);
-                dataUpdated();
-            }
-        });
-    }
-    private void dataUpdated() {
-        if (user == null) {
-            return;
-        }
-        customCategoriesList.clear();
-        customCategoriesList.addAll(CategoriesHelper.getCustomCategories(user));
-        categoriesAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -65,14 +48,14 @@ public class CategoriesActivity extends BaseActivity {
     }
 
     @Override
-    protected void onResume() {
-        getData();
-        super.onResume();
+    protected void onStart() {
+        super.onStart();
+        categoriesAdapter.startListening();
     }
 
     @Override
-    protected void onRestart() {
-        getData();
-        super.onRestart();
+    protected void onStop() {
+        super.onStop();
+        categoriesAdapter.stopListening();
     }
 }

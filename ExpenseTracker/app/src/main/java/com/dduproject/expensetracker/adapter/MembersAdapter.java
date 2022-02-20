@@ -1,57 +1,52 @@
 package com.dduproject.expensetracker.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
-import java.util.List;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.dduproject.expensetracker.R;
 import com.dduproject.expensetracker.activities.EditMemberActivity;
+import com.dduproject.expensetracker.databinding.RowMemberBinding;
 import com.dduproject.expensetracker.models.Member;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 
-public class MembersAdapter extends ArrayAdapter<Member> implements View.OnClickListener {
+public class MembersAdapter extends FirebaseRecyclerAdapter<Member, MembersAdapter.MemberViewHolder> {
 
-    private final Activity activity;
-    Context context;
+    Context mContext;
 
-    public MembersAdapter(Activity activity, List<Member> data, Context context) {
-        super(context, R.layout.row_home, data);
-        this.context = context;
-        this.activity = activity;
-
+    public MembersAdapter(Context mContext, @NonNull FirebaseRecyclerOptions<Member> options) {
+        super(options);
+        this.mContext = mContext;
     }
 
     @Override
-    public void onClick(View v) {
-
-    }
-
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View listItem = convertView;
-        if (listItem == null) {
-            listItem = LayoutInflater.from(context).inflate(R.layout.row_member, parent, false);
-        }
-        Member member = getItem(position);
-        TextView tvMemberName = listItem.findViewById(R.id.tvMemberName);
-        tvMemberName.setText(member.getMemberName());
-
-
-        listItem.setOnClickListener(v -> {
-            Intent intent = new Intent(activity, EditMemberActivity.class);
+    public void onBindViewHolder(MemberViewHolder viewHolder, int position, @NonNull Member member) {
+        viewHolder.binding.tvMemberName.setText(member.name);
+        viewHolder.binding.btnEditMember.setOnClickListener(view -> {
+            Intent intent = new Intent(mContext, EditMemberActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra("member-id", member.getMemberId());
             intent.putExtra("member-name", member.getMemberName());
-            activity.startActivity(intent);
+            mContext.startActivity(intent);
         });
-        return listItem;
     }
 
+    @NonNull
+    @Override
+    public MemberViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new MemberViewHolder(RowMemberBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+    }
+
+    public static class MemberViewHolder extends RecyclerView.ViewHolder{
+        RowMemberBinding binding;
+        public MemberViewHolder(RowMemberBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
+    }
 
 }
