@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.dduproject.expensetracker">
+    package="com.dduce.expensetracker">
 
     <application
         android:allowBackup="true"
@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/MaterialTheme">
         <activity
-            android:name=".activities.SplashActivity"
+            android:name="com.dduce.expensetracker.activities.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,41 +20,41 @@
         </activity>
         <activity
             android:exported="true"
-            android:name=".activities.SignInActivity" />
+            android:name="com.dduce.expensetracker.activities.SignInActivity" />
         <activity
             android:exported="true"
-            android:name=".activities.MainActivity" />
+            android:name="com.dduce.expensetracker.activities.MainActivity" />
         <activity
             android:exported="true"
-            android:name=".activities.AddEntryActivity"
+            android:name="com.dduce.expensetracker.activities.AddEntryActivity"
             android:screenOrientation="fullSensor">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.MainActivity" />
+                android:value="com.dduce.expensetracker.activities.MainActivity" />
         </activity>
-        <activity android:name=".activities.EditEntryActivity">
+        <activity android:name="com.dduce.expensetracker.activities.EditEntryActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.MainActivity" />
+                android:value="com.dduce.expensetracker.activities.MainActivity" />
         </activity>
         <activity
             android:exported="true"
-            android:name=".activities.CategoriesActivity" />
+            android:name="com.dduce.expensetracker.activities.CategoriesActivity" />
         <activity
             android:exported="true"
-            android:name=".activities.AddCategoryActivity" />
+            android:name="com.dduce.expensetracker.activities.AddCategoryActivity" />
         <activity
             android:exported="true"
-            android:name=".activities.EditCategoryActivity" />
+            android:name="com.dduce.expensetracker.activities.EditCategoryActivity" />
         <activity
             android:exported="true"
-            android:name=".activities.MembersActivity" />
+            android:name="com.dduce.expensetracker.activities.MembersActivity" />
         <activity
             android:exported="true"
-            android:name=".activities.AddMemberActivity" />
+            android:name="com.dduce.expensetracker.activities.AddMemberActivity" />
         <activity
             android:exported="true"
-            android:name=".activities.EditMemberActivity" />
+            android:name="com.dduce.expensetracker.activities.EditMemberActivity" />
     </application>
 
 </manifest>
